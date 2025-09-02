@@ -13,6 +13,6 @@ namespace Demo03.Models
         public string Name { get; set; }
         public int Age { get; set; }
 
-        public ICollection<StudentCourse> Courses { get; set; }=new HashSet<StudentCourse>();
+        public virtual ICollection<StudentCourse> Courses { get; set; }=new HashSet<StudentCourse>();
     }
 }

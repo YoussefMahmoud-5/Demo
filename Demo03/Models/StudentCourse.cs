@@ -19,8 +19,8 @@ namespace Demo03.Models
         public int CrsId { get; set; }
         public int Grade { get; set; }
 
-        public Student Student { get; set; } = null!;
-        public Course Course { get; set; } = null!;
+        public virtual Student Student { get; set; } = null!;
+        public virtual Course Course { get; set; } = null!;
 
     }
 }

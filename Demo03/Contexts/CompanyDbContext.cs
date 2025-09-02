@@ -15,7 +15,8 @@ namespace Demo03.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS; Database = CompanyG01; Trusted_Connection = True; TrustServerCertificate = True");
+            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS; Database = CompanyG01; Trusted_Connection = True; TrustServerCertificate = True")
+                          .UseLazyLoadingProxies();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -97,13 +98,29 @@ namespace Demo03.Contexts
                         .HasForeignKey(SC => SC.CrsId)
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+            //modelBuilder.Entity<Department>()
+            //            .HasData(
+            //                     new Department() { DeptId = 6, Code = 99, DateOfCreation = new DateOnly(2021, 03, 19), DepartmentName = "Sales" },
+            //                     new Department() { DeptId = 7, Code = 100, DateOfCreation = new DateOnly(2023, 07, 1), DepartmentName = "Software Engineering" },
+            //                     new Department() { DeptId = 8 ,Code = 105, DateOfCreation = new DateOnly(2024, 12, 25), DepartmentName = "Markting" }
+            //                    );
+            modelBuilder.Entity<Department>().HasData(
+                                   new Department { DeptId = 1, Code = 100, DepartmentName = "Sales", MngID = null, DateOfCreation = new DateOnly(2024, 04, 13) },
+                                   new Department { DeptId = 2, Code = 101, DepartmentName = "HR", MngID = null, DateOfCreation = new DateOnly(2020, 09, 15) },
+                                   new Department { DeptId = 3, Code = 102, DepartmentName = "Marketing", MngID = null, DateOfCreation = new DateOnly(2025, 05, 30) },
+                                   new Department { DeptId = 4, Code = 103, DepartmentName = "Software Eng.", MngID = null, DateOfCreation = new DateOnly(2019, 11, 01) },
+                                   new Department { DeptId = 5, Code = 104, DepartmentName = "IT", MngID = null, DateOfCreation = new DateOnly(2020, 09, 15) },
+                                   new Department { DeptId = 6, Code = 105, DepartmentName = "Teaching", MngID = null, DateOfCreation = new DateOnly(2025, 05, 30) },
+                                   new Department { DeptId = 7, Code = 106, DepartmentName = "Engineering", MngID = null, DateOfCreation = new DateOnly(2019, 11, 01) }
+                                   );
+
         }
 
         public DbSet<Employee> Employees { get; set; }
         //public DbSet<Department> Departments { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Course> Courses { get; set; }
-        public DbSet<Student> Students  { get; set; }
+        public DbSet<Student> Students { get; set; }
 
 
     }

@@ -23,19 +23,19 @@ namespace Demo03.Configuration_Classes
                     .HasColumnName("Name")
                     .IsRequired();
 
-            builder.Property(D => D.DateOfCreation)
-                    //.HasDefaultValue(DateTime.Now);
-                    .HasComputedColumnSql("GetDate()");
+            builder.Property(D => D.DateOfCreation);
+            //.HasDefaultValue(DateTime.Now);
+            //.HasComputedColumnSql("GetDate()");
 
             builder.HasOne(D => D.Manager)
                    .WithOne(E => E.ManagedDepartment)
-                   .HasForeignKey<Department>(D => D.ManagerEmpId)
-                   .OnDelete(DeleteBehavior.NoAction)
-                   .IsRequired();
+                   .HasForeignKey<Department>(D => D.MngID)
+                   .OnDelete(DeleteBehavior.Cascade);
+                   //.IsRequired();
 
             builder.HasMany<Employee>(D => D.Employees)
                    .WithOne(E => E.EmployeeDepartment)
-                   .HasForeignKey(E => E.DepartmentDeptId)
+                   .HasForeignKey(E => E.DepartmentId)
                    .OnDelete(DeleteBehavior.NoAction)
                    .IsRequired();
         }

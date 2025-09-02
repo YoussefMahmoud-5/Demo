@@ -10,6 +10,6 @@ namespace Demo03.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public ICollection<StudentCourse> Students { get; set; } = new HashSet<StudentCourse>();
+        public virtual ICollection<StudentCourse> Students { get; set; } = new HashSet<StudentCourse>();
     }
 }

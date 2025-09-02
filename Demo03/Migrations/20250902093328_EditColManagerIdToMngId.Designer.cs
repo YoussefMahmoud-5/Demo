@@ -4,6 +4,7 @@ using Demo03.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo03.Migrations
 {
     [DbContext(typeof(CompanyDbContext))]
-    partial class CompanyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250902093328_EditColManagerIdToMngId")]
+    partial class EditColManagerIdToMngId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,57 +72,6 @@ namespace Demo03.Migrations
                         .HasFilter("[MngID] IS NOT NULL");
 
                     b.ToTable("Departments", "dbo");
-
-                    b.HasData(
-                        new
-                        {
-                            DeptId = 1,
-                            Code = 100,
-                            DateOfCreation = new DateOnly(2024, 4, 13),
-                            DepartmentName = "Sales"
-                        },
-                        new
-                        {
-                            DeptId = 2,
-                            Code = 101,
-                            DateOfCreation = new DateOnly(2020, 9, 15),
-                            DepartmentName = "HR"
-                        },
-                        new
-                        {
-                            DeptId = 3,
-                            Code = 102,
-                            DateOfCreation = new DateOnly(2025, 5, 30),
-                            DepartmentName = "Marketing"
-                        },
-                        new
-                        {
-                            DeptId = 4,
-                            Code = 103,
-                            DateOfCreation = new DateOnly(2019, 11, 1),
-                            DepartmentName = "Software Eng."
-                        },
-                        new
-                        {
-                            DeptId = 5,
-                            Code = 104,
-                            DateOfCreation = new DateOnly(2020, 9, 15),
-                            DepartmentName = "IT"
-                        },
-                        new
-                        {
-                            DeptId = 6,
-                            Code = 105,
-                            DateOfCreation = new DateOnly(2025, 5, 30),
-                            DepartmentName = "Teaching"
-                        },
-                        new
-                        {
-                            DeptId = 7,
-                            Code = 106,
-                            DateOfCreation = new DateOnly(2019, 11, 1),
-                            DepartmentName = "Engineering"
-                        });
                 });
 
             modelBuilder.Entity("Demo03.Models.Employee", b =>

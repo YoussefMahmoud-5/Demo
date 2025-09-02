@@ -4,6 +4,7 @@ using Demo03.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo03.Migrations
 {
     [DbContext(typeof(CompanyDbContext))]
-    partial class CompanyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250901133319_SeedingDepartmentTable")]
+    partial class SeedingDepartmentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,108 +62,66 @@ namespace Demo03.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Name");
 
-                    b.Property<int?>("MngID")
+                    b.Property<int?>("ManagerEmpId")
                         .HasColumnType("int");
 
                     b.HasKey("DeptId");
 
-                    b.HasIndex("MngID")
+                    b.HasIndex("ManagerEmpId")
                         .IsUnique()
-                        .HasFilter("[MngID] IS NOT NULL");
+                        .HasFilter("[ManagerEmpId] IS NOT NULL");
 
                     b.ToTable("Departments", "dbo");
 
                     b.HasData(
                         new
                         {
-                            DeptId = 1,
-                            Code = 100,
-                            DateOfCreation = new DateOnly(2024, 4, 13),
+                            DeptId = 6,
+                            Code = 99,
+                            DateOfCreation = new DateOnly(2021, 3, 19),
                             DepartmentName = "Sales"
                         },
                         new
                         {
-                            DeptId = 2,
-                            Code = 101,
-                            DateOfCreation = new DateOnly(2020, 9, 15),
-                            DepartmentName = "HR"
-                        },
-                        new
-                        {
-                            DeptId = 3,
-                            Code = 102,
-                            DateOfCreation = new DateOnly(2025, 5, 30),
-                            DepartmentName = "Marketing"
-                        },
-                        new
-                        {
-                            DeptId = 4,
-                            Code = 103,
-                            DateOfCreation = new DateOnly(2019, 11, 1),
-                            DepartmentName = "Software Eng."
-                        },
-                        new
-                        {
-                            DeptId = 5,
-                            Code = 104,
-                            DateOfCreation = new DateOnly(2020, 9, 15),
-                            DepartmentName = "IT"
-                        },
-                        new
-                        {
-                            DeptId = 6,
-                            Code = 105,
-                            DateOfCreation = new DateOnly(2025, 5, 30),
-                            DepartmentName = "Teaching"
-                        },
-                        new
-                        {
                             DeptId = 7,
-                            Code = 106,
-                            DateOfCreation = new DateOnly(2019, 11, 1),
-                            DepartmentName = "Engineering"
+                            Code = 100,
+                            DateOfCreation = new DateOnly(2023, 7, 1),
+                            DepartmentName = "Software Engineering"
+                        },
+                        new
+                        {
+                            DeptId = 8,
+                            Code = 105,
+                            DateOfCreation = new DateOnly(2024, 12, 25),
+                            DepartmentName = "Markting"
                         });
                 });
 
             modelBuilder.Entity("Demo03.Models.Employee", b =>
                 {
-                    b.Property<int>("EmpId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmpId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("Age")
+                    b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int>("DepartmentDeptId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmpName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar")
-                        .HasColumnName("EmpName");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Salary")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("money")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(4000m);
 
-                    b.HasKey("EmpId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("DepartmentDeptId");
 
                     b.ToTable("Employees", "dbo");
                 });
@@ -224,7 +185,7 @@ namespace Demo03.Migrations
                 {
                     b.HasOne("Demo03.Models.Employee", "Manager")
                         .WithOne("ManagedDepartment")
-                        .HasForeignKey("Demo03.Models.Department", "MngID")
+                        .HasForeignKey("Demo03.Models.Department", "ManagerEmpId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Manager");
@@ -234,33 +195,30 @@ namespace Demo03.Migrations
                 {
                     b.HasOne("Demo03.Models.Department", "EmployeeDepartment")
                         .WithMany("Employees")
-                        .HasForeignKey("DepartmentId")
+                        .HasForeignKey("DepartmentDeptId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.OwnsOne("Demo03.Models.Address", "EmpAddress", b1 =>
                         {
-                            b1.Property<int>("EmployeeEmpId")
+                            b1.Property<int>("EmployeeId")
                                 .HasColumnType("int");
 
                             b1.Property<string>("City")
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("City");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Country")
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("Country");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Street")
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("Street");
+                                .HasColumnType("nvarchar(max)");
 
-                            b1.HasKey("EmployeeEmpId");
+                            b1.HasKey("EmployeeId");
 
                             b1.ToTable("Employees", "dbo");
 
                             b1.WithOwner()
-                                .HasForeignKey("EmployeeEmpId");
+                                .HasForeignKey("EmployeeId");
                         });
 
                     b.Navigation("EmpAddress")

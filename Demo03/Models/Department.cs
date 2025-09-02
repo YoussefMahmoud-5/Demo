@@ -16,7 +16,7 @@ namespace Demo03.Models
         public DateOnly DateOfCreation { get; set; }
 
         //[ForeignKey(nameof(Manager))]
-        public int ManagerEmpId { get; set; }
+        public int? MngID { get; set; }
         //public int ManagerId { get; set; }
 
         //Navigational Property [One]
@@ -24,10 +24,10 @@ namespace Demo03.Models
         //IF Not Nullable this Know us the Relation is total 
         //IF  Nullable this Know us the Relation is partial 
         [InverseProperty(nameof(Employee.ManagedDepartment))]
-        public Employee Manager { get; set; }=null!;
+        public virtual Employee? Manager { get; set; }=null!;
 
         //Navigational Property [Many]
         [InverseProperty(nameof(Employee.EmployeeDepartment))]
-        public ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
+        public virtual ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
     }
 }
