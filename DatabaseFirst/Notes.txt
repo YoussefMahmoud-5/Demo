@@ -1,0 +1,87 @@
+=> Loading Related Data
+
+Methods to load navigation properties:
+
+Eager Loading
+
+		Uses Include / ThenInclude.
+
+		Loads main entity + related data in a single query.
+
+		Useful when you always need related data.
+
+Explicit Loading
+
+		Uses Entry().Reference() or Entry().Collection().
+		
+		Loads related data manually after the main query.
+		
+		Good when you want control over timing/performance.
+
+Lazy Loading
+
+		Related data isn’t loaded until first accessed.
+		
+		Not enabled by default in EF Core.
+		
+		Requires:
+		
+		Install Microsoft.EntityFrameworkCore.Proxies
+		
+		Enable it in DbContext
+		
+		Mark navigation properties as virtual.
+
+=> Inheritance Mapping Strategies
+
+
+Table-per-Concrete Class (TPC)
+
+		Each concrete class gets its own table.
+		
+		No table for base classes.
+		
+Table-per-Hierarchy (TPH) (default)
+		
+		One table stores all entities in the hierarchy.
+		
+		A discriminator column identifies the entity type.
+
+Table-per-Type (TPT)
+
+		Each class in the hierarchy maps to its own table.
+		
+		EF Core performs joins when querying derived types.
+
+=> Database First Approach
+
+		Start from an existing database.
+		
+		EF Core generates Models, DbContext, and relationships.
+		
+		Steps:
+		
+		Install EF Core packages.
+		
+		Use Scaffold-DbContext.
+		
+		Optionally select schemas/tables.
+		
+		Define context and model output directories.
+
+=> EF Core Power Tools
+
+		Visual Studio extension that simplifies EF Core workflows:
+		
+		Reverse engineering database.
+		
+		Viewing models.
+		
+		Managing migrations.
+		
+		Especially useful for Database First.
+
+=> Running Raw SQL
+
+		EF Core supports executing raw SQL queries when needed.
+		RawSql is not qualified enough
