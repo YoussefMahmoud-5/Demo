@@ -1,4 +1,5 @@
-﻿using DatabaseFirst.Models;
+﻿using DatabaseFirst.Contexts.Models;
+using DatabaseFirst.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseFirst
@@ -37,6 +38,36 @@ namespace DatabaseFirst
 
             // Console.WriteLine(Result); 
             #endregion
+
+            #region Stored Procedure
+            // using NorthwindDbContext context = new NorthwindDbContext();
+            #region Example 01
+            //NorthwindDbContextProcedures procedures = new NorthwindDbContextProcedures(context);
+
+            //var Result = procedures.CustOrderHistAsync("ALFKI").Result;
+            //foreach (var item in Result)
+            //{
+            //    Console.WriteLine(item);
+            //} 
+            #endregion
+
+            #region Example 02
+            //var Result = context.Procedures.DeleteProductByIDAsync(89).Result;
+            //Console.WriteLine(Result); 
+            #endregion
+            #endregion
+
+            #region Views
+            //using NorthwindDbContext context = new NorthwindDbContext();
+
+            //var Result = context.SalesTotalsByAmounts.ToList();
+            //foreach (var result in Result)
+            //{
+            //    Console.WriteLine(result.CompanyName);
+            //} 
+            #endregion
+
+
         }
     }
 }

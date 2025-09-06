@@ -430,9 +430,15 @@ namespace Demo03
             //Console.WriteLine(Result);
             //Result = context.Employees.Any(E => E.Age != null);
             //Console.WriteLine(Result); 
-            #endregion 
             #endregion
-            
+            #endregion
+
+            using CompanyDbContext context = new CompanyDbContext();
+            var Result= context.EmployeeDepartmentView.ToList();
+            foreach(var result in Result)
+            {
+                Console.WriteLine($"{result.EmployeeName} : {result.DepartmentName}");
+            }
 
 
 

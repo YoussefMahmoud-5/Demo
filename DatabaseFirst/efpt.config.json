@@ -1,5 +1,5 @@
 ﻿{
-   "CodeGenerationMode": 5,
+   "CodeGenerationMode": 4,
    "ContextClassName": "NorthwindDbContext",
    "ContextNamespace": null,
    "FilterSchemas": false,
@@ -9,7 +9,7 @@
    "OutputContextPath": null,
    "OutputPath": "Models",
    "PreserveCasingWithRegex": true,
-   "ProjectRootNamespace": "DatabaseFirst",
+   "ProjectRootNamespace": "DatabaseFirst.Contexts",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 2,
    "SelectedToBeGenerated": 0,
@@ -32,12 +32,16 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Product Sales for 1997]",
+         "Name": "[dbo].[Sales Totals by Amount]",
          "ObjectType": 3
       },
       {
-         "Name": "[dbo].[Sales Totals by Amount]",
-         "ObjectType": 3
+         "Name": "[dbo].[CustOrderHist]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[DeleteProductByID]",
+         "ObjectType": 1
       }
    ],
    "UiHint": null,

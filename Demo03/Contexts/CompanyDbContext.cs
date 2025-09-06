@@ -114,6 +114,9 @@ namespace Demo03.Contexts
                                    new Department { DeptId = 7, Code = 106, DepartmentName = "Engineering", MngID = null, DateOfCreation = new DateOnly(2019, 11, 01) }
                                    );
 
+            modelBuilder.Entity<EmployeeDepartmentView>()
+                        .ToView("EmployeeDepartmentView");
+
         }
 
         public DbSet<Employee> Employees { get; set; }
@@ -121,7 +124,16 @@ namespace Demo03.Contexts
         public DbSet<Product> Products { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<EmployeeDepartmentView> EmployeeDepartmentView { get; set; }
 
-
+        /*
+         create view EmployeeDepartmentView
+        with Encryption , SchemaBinding
+        as 
+            select E.EmpId as 'EmployeeId' , E.EmpName as 'EmplyeeName' 
+                   D.DeptId as 'DepartmentId , D.Name as 'DepartmentName'
+            from dbo.Employees E, dbo.Departments D
+            where D.DeptId = E.DepartmentId
+         */
     }
 }

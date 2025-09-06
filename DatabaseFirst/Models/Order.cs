@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace DatabaseFirst.Models;
+namespace DatabaseFirst.Contexts.Models;
 
 [Index("CustomerId", Name = "CustomerID")]
 [Index("CustomerId", Name = "CustomersOrders")]
